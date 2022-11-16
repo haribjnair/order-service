@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: order-service
+spec:
+ selector:
+  matchLabels:
+   app: order-service
+ replicas: 1
+ template:
+  metadata:
+   labels:
+    app: order-service
+  spec:
+   containers:
+    - name: order-service
+      image: order-service.jar
+      imagePullPolicy: IfNotPresent
+      ports:
+       - containerPort: 8091
+      env:
+       - name: DB_HOST
+         value: mysql
+       - name: DB_NAME
+         value: myschema
+       - name: DB_USERNAME
+         value: root
+       - name: DB_PASSWORD
+         value: root
